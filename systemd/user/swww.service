@@ -1,0 +1,19 @@
+[Unit]
+Description=Start swww daemon for Hyprland
+After=graphical-session.target
+
+[Service]
+# Ensure the runtime dir is set inside the unit
+Environment=XDG_RUNTIME_DIR=%t
+# Wait for Wayland socket to appear before starting (avoid race with compositor)
+ExecStartPre=/bin/sh -c 'for i in $(seq 1 40); do [ -S "%t/wayland-0" ] && exit 0 || sleep 0.25; done'
+# If another swww-daemon is already running, do not try to spawn a second one.
+# The ExecStart wrapper checks for an existing instance and exits 0 if found.
+ExecStart=/bin/sh -c 'pgrep -u "$USER" -x swww-daemon >/dev/null && echo "swww-daemon already running, skipping start" && exit 0 || exec /usr/bin/swww-daemon -f argb'
+Restart=on-failure
+Type=simple
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

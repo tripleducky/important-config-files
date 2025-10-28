@@ -1,0 +1,14 @@
+[Unit]
+Description=Exec wallpaper using swww
+After=swww.service
+Wants=swww.service
+
+[Service]
+# Use the real home path; ensure the script is executable
+ExecStart=/bin/bash /home/andre/.config/swww/swww.sh
+Environment=XDG_RUNTIME_DIR=%t
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
