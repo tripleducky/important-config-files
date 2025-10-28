@@ -484,18 +484,12 @@ binds {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
 
-  //  spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" // Polkit
+    //  spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" // Polkit
+
+        spawn-sh-at-startup "kanshi"
 
 
-    spawn-sh-at-startup "swww-daemon"
-    
-
-    spawn-sh-at-startup "kanshi"
-    
-    spawn-sh-at-startup "swww img /home/andre/Pictures/wallpaper/pexels4.jpg"
-
-
-    spawn-sh-at-startup "quickshell --config simple-bar" // Launch quickshell
+        spawn-sh-at-startup "quickshell --config simple-bar" // Launch quickshell
 
 
    // spawn-at-startup "swayidle -C /home/your-username/.config/swayidle/config"
@@ -760,6 +754,7 @@ binds {
 
 
 }
+
 
 
 
